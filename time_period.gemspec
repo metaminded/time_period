@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.name        = "time_period"
   s.version     = TimePeriod::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Peter Porn"]
+  s.authors     = ["Peter Horn"]
   s.email       = ["ph@metaminded.com"]
   s.homepage    = "https://github.com/metaminded/time_period"
   s.summary     = %q{Store time periods in a single column, with reasonable simple_form support}
@@ -18,4 +18,7 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
+
+  s.add_runtime_dependency('rails', '> 3.0.0')
+  s.add_runtime_dependency('simple_form')
 end
