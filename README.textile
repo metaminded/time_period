@@ -29,7 +29,9 @@ In the model, declare the field as 'being a time period':
 then, you get the following methods:
 
 * <tt>duration_period</tt> – raw reader of the saved string.
+* <tt>duration_period_unit</tt> – getter for the unit, i.e., "day", "week", ...
 * <tt>duration_period_unit=</tt> – setter for the unit, i.e., "day", "week", ...
+* <tt>duration_period_number</tt> – getter for the number, i.e., 1, 2, 3
 * <tt>duration_period_number=</tt> – setter for the number, i.e., 1, 2, 3
 * <tt>duration_period=</tt> – setter for the complete period, accepts either strings as above or <tt>ActiveSupport::Duration</tt> objects as <tt>3.weeks</tt>
 * <tt>duration_period_value</tt> – reads the value as an <tt>ActiveSupport::Duration</tt> object
