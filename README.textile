@@ -24,7 +24,7 @@ In the model, declare the field as 'being a time period':
     time_period :duration_period, default => 7.days
     ...
   end
-</ActiveRecord::Base>
+</pre>
 
 then, you get the following methods:
 
