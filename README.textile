@@ -4,7 +4,7 @@ h2. Mission Objective
 
 Store time periods as "3 days" or "7 weeks" in a database.
 
-We use one simple varchar column in which we store the value as above in the format "&lt;integer&gt; &lt;day|week|month|year&gt;".
+We use one simple varchar column in which we store the value as above in the format "<integer> <day|week|month|year>".
 
 h2. Example
 
@@ -19,9 +19,9 @@ In the migration, define a string field:
 In the model, declare the field as 'being a time period':
 
 <pre>
-  class MyModel &lt; ActiveRecord::Base
+  class MyModel < ActiveRecord::Base
     ...
-    time_period :duration_period, default =&gt; 7.days
+    time_period :duration_period, default => 7.days
     ...
   end
 </ActiveRecord::Base>
@@ -35,31 +35,31 @@ then, you get the following methods:
 * <tt>duration_period_value</tt> – reads the value as an <tt>ActiveSupport::Duration</tt> object
 
 <pre>
-  &gt;&gt; m = MyModel.new
-  &gt;&gt; m.duration_period_unit = &quot;day&quot;
-  &quot;day&quot;
-  &gt;&gt; m.duration
-  =&gt; &quot;0 day&quot;
-  &gt;&gt; m.duration_period_number = 7
-  =&gt; 7
-  &gt;&gt; m.duration
-  =&gt; &quot;7 day&quot;
-  &gt;&gt; m.duration_period_value
-  =&gt; 7 days
-  &gt;&gt; m.duration = &#x27;3 week&#x27;
-  =&gt; &quot;3 week&quot;
-  &gt;&gt; m.duration_period_value
-  =&gt; 21 days
+  >> m = MyModel.new
+  >> m.duration_period_unit = "day"
+  "day"
+  >> m.duration
+  => "0 day"
+  >> m.duration_period_number = 7
+  => 7
+  >> m.duration
+  => "7 day"
+  >> m.duration_period_value
+  => 7 days
+  >> m.duration = '3 week'
+  => "3 week"
+  >> m.duration_period_value
+  => 21 days
 </pre>
 
 For <tt>simple_form</tt> forms, we offer an input:
 
 <pre>
-  &lt;%= simple_form_for @my_thing do |f| %&gt;
+  <%= simple_form_for @my_thing do |f| %>
     ...
-    &lt;%= f.input :duration_period_value,  as: :time_period %&gt;
+    <%= f.input :duration_period_value,  as: :time_period %>
     ...
-  &lt;% end %&gt;
+  <% end %>
 </pre>
 
 The result then looks a little bit like this:
