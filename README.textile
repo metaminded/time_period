@@ -57,7 +57,7 @@ For <tt>simple_form</tt> forms, we offer an input:
 <pre>
   <%= simple_form_for @my_thing do |f| %>
     ...
-    <%= f.input :duration_period_value,  as: :time_period %>
+    <%= f.input :duration_period,  as: :time_period %>
     ...
   <% end %>
 </pre>
