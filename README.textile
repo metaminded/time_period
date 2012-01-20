@@ -4,7 +4,7 @@ h2. Mission Objective
 
 Store time periods as "3 days" or "7 weeks" in a database.
 
-We use one simple varchar column in which we store the value as above in the format "<integer> <day|week|month|year>".
+We use one simple varchar column in which we store the value as above in the format "&lt;integer&gt; &lt;day|week|month|year&gt;".
 
 h2. Example
 
