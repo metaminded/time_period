@@ -11,15 +11,30 @@ class ActiveRecord::Base
     opts = {validate: true, default: nil}.merge oopts
 
     define_method "#{name}_number" do
-      read_attribute(name).split(" ").first.to_i
+      if read_attribute(name)
+        return read_attribute(name).split(" ").first.to_i
+      else
+        return 0
+      end
     end
 
     define_method "#{name}_unit" do
-      read_attribute(name).split(" ").last
+      if read_attribute(name)
+        return read_attribute(name).split(" ").last
+      else
+        return 'month'
+      end
     end
 
     define_method "#{name}_value" do
-      n, p = read_attribute(name).split(" ")
+      n = 0;
+      p = ''
+      if(read_attribute(name))
+        n, p = read_attribute(name).split(" ")
+      else
+        n = 0;
+        p = 'day';
+      end
       case p
       when 'week'  then n.to_i.week
       when 'month' then n.to_i.month
@@ -30,14 +45,19 @@ class ActiveRecord::Base
     end
 
     define_method "#{name}_number=" do |number|
-      n,p = read_attribute(name).split(" ")
+      if(read_attribute(name))
+        n,p = read_attribute(name).split(" ")
+      end
       p ||= 'day'
       write_attribute(name, "#{number.to_i} #{p}")
       number
     end
 
     define_method "#{name}_unit=" do |unit|
-      n,p = read_attribute(name).split(" ")
+      if(read_attribute(name))
+        n,p = read_attribute(name).split(" ")
+      end
+      n ||= 0
       raise "unsupported unit '#{unit}'" unless %w{day week month year}.member?(unit.to_s)
       write_attribute(name, "#{n.to_i} #{unit}")
       unit
