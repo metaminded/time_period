@@ -64,6 +64,7 @@ class ActiveRecord::Base
     end
 
     define_method "#{name}=" do |n_u|
+      n_u = '0 week' unless n_u
       number,unit = if n_u.is_a?(String)
         n_u.split(" ")
       elsif n_u.is_a?(ActiveSupport::Duration)
