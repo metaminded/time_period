@@ -6,9 +6,11 @@ Store time periods as "3 days" or "7 weeks" in a database.
 
 We use one simple varchar column in which we store the value as above in the format "&lt;integer&gt; &lt;day|week|month|year&gt;".
 
-h2. Example
+h2. Usage
 
-In the migration, define a string field:
+First add the <tt>time_period</tt> gem to your Gemfile. Then run the <tt>bundle install</tt> command.
+
+In the migration, define a string field
 
 <pre>
   ...
@@ -16,12 +18,14 @@ In the migration, define a string field:
   ...
 </pre>
 
+and migrate your database <tt>rake db:migrate</tt>
+
 In the model, declare the field as 'being a time period':
 
 <pre>
   class MyModel < ActiveRecord::Base
     ...
-    time_period :duration_period, default => 7.days
+    time_period :duration_period, default: 7.days
     ...
   end
 </pre>
@@ -40,15 +44,15 @@ then, you get the following methods:
   >> m = MyModel.new
   >> m.duration_period_unit = "day"
   "day"
-  >> m.duration
+  >> m.duration_period
   => "0 day"
   >> m.duration_period_number = 7
   => 7
-  >> m.duration
+  >> m.duration_period
   => "7 day"
   >> m.duration_period_value
   => 7 days
-  >> m.duration = '3 week'
+  >> m.duration_period = '3 week'
   => "3 week"
   >> m.duration_period_value
   => 21 days
