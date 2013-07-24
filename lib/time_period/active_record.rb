@@ -77,7 +77,7 @@ class ActiveRecord::Base
       n_u
     end
 
-    validates_format_of(name, :with => /^\d+ ((day)|(week)|(month)|(year))$/) if opts[:validate]
+    validates_format_of(name, :with => /\A\d+ ((day)|(week)|(month)|(year))\Z/) if opts[:validate]
 
     before_validation do
       self.send("#{name}=", opts[:default]) unless read_attribute(name).present?
