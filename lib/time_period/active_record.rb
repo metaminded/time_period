@@ -54,6 +54,8 @@ class ActiveRecord::Base
       n_u = '0 week' unless n_u
       number,unit = if n_u.is_a?(String)
         n_u.split(" ")
+      elsif n_u.is_a?(TimePeriod::Duration)
+        [n_u.number, n_u.unit]
       elsif n_u.is_a?(ActiveSupport::Duration)
         u,n = n_u.parts.flatten
         [n.to_i, u.to_s.singularize]
