@@ -7,41 +7,28 @@
 # (c) 2012 Peter Horn, metaminded UG
 
 class ActiveRecord::Base
-  def self.time_period(name, oopts)
+  def self.time_period(name, oopts={})
     opts = {validate: true, default: nil}.merge oopts
 
-    define_method "#{name}_number" do
-      if read_attribute(name)
-        return read_attribute(name).split(" ").first.to_i
+    define_method name do
+      str = read_attribute(name).presence
+      if str
+        TimePeriod::Duration.new(str)
       else
-        return 0
+        TimePeriod::Duration.new(0, :month)
       end
     end
 
     define_method "#{name}_unit" do
-      if read_attribute(name)
-        return read_attribute(name).split(" ").last
-      else
-        return 'month'
-      end
+      self.send(name).unit
+    end
+
+    define_method "#{name}_number" do
+      self.send(name).number
     end
 
     define_method "#{name}_value" do
-      n = 0;
-      p = ''
-      if(read_attribute(name))
-        n, p = read_attribute(name).split(" ")
-      else
-        n = 0;
-        p = 'day';
-      end
-      case p
-      when 'week'  then n.to_i.week
-      when 'month' then n.to_i.month
-      when 'day'   then n.to_i.day
-      when 'year'  then n.to_i.year
-      else raise "wrong format"
-      end
+      self.send(name).duration
     end
 
     define_method "#{name}_number=" do |number|
