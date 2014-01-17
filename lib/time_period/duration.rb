@@ -44,4 +44,28 @@ class TimePeriod::Duration
     raise "can't add #{other.unit} to #{unit}" unless other.unit == unit
     TimePeriod::Duration.new(other.number + number, unit)
   end
+
+  def <(other)
+    (self <=> other)  < 0
+  end
+
+  def ==(other)
+    (self <=> other)  == 0
+  end
+
+  def >(other)
+    (self <=> other)  > 0
+  end
+
+  def <=(other)
+    (self <=> other)  <= 0
+  end
+
+  def >=(other)
+    (self <=> other)  >= 0
+  end
+
+  def !=(other)
+    (self <=> other)  == 0
+  end
 end
